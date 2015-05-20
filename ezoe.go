@@ -4,7 +4,6 @@ import (
 	"errors"
 	"flag"
 	"fmt"
-	"io"
 	"net/http"
 	"net/url"
 	"os"
@@ -61,7 +60,6 @@ func post(question string) error {
 	if resp.StatusCode != 200 {
 		return errors.New(resp.Status)
 	}
-	io.Copy(os.Stdout, resp.Body)
 	return nil
 }
 

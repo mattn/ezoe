@@ -7,6 +7,7 @@ import (
 	"net/http"
 	"net/url"
 	"os"
+	"regexp"
 	"strings"
 	"time"
 
@@ -27,7 +28,10 @@ var (
 	stdout = colorable.NewColorableStdout()
 )
 
-var highlights = []string{"質問ではない", "自由"}
+var highlights = []*regexp.Regexp{
+	regexp.MustCompile("質問ではない。?"),
+	regexp.MustCompile("自由"),
+}
 
 func post(question string) error {
 	doc, err := goquery.NewDocument("http://ask.fm/" + *user)
@@ -101,7 +105,7 @@ func main() {
 					// Description
 					desc := item.Description
 					for _, h := range highlights {
-						desc = strings.Replace(desc, h, Green+h+White, -1)
+						desc = h.ReplaceAllString(desc, Green+"$0"+White)
 					}
 					fmt.Fprintln(stdout, "  "+White+desc+End)
 					fmt.Println("")

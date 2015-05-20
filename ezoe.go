@@ -30,7 +30,7 @@ var (
 
 var highlights = []*regexp.Regexp{
 	regexp.MustCompile("質問ではない。?"),
-	regexp.MustCompile("自由"),
+	regexp.MustCompile("不?自由"),
 }
 
 func post(question string) error {

@@ -62,11 +62,7 @@ func doLogin() error {
 		return err
 	}
 
-	check := false
-	doc.Find(".link-logout").Each(func(_ int, s *goquery.Selection) {
-		check = true
-	})
-	if check {
+	if doc.Find(".link-logout").Length() > 0 {
 		return nil
 	}
 
@@ -114,11 +110,7 @@ func doLogin() error {
 		return err
 	}
 
-	check = false
-	doc.Find(".link-logout").Each(func(_ int, s *goquery.Selection) {
-		check = true
-	})
-	if !check {
+	if doc.Find(".link-logout").Length() == 0 {
 		return errors.New("正しいユーザもしくはパスワードではない")
 	}
 

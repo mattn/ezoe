@@ -40,15 +40,16 @@ var highlights = []*regexp.Regexp{
 }
 
 func doLogin() error {
+	me, err := user.Current()
+	if err != nil {
+		return err
+	}
+
 	uri, err := url.Parse("http://ask.fm/")
 	if err != nil {
 		return err
 	}
 
-	me, err := user.Current()
-	if err != nil {
-		return err
-	}
 	session := filepath.Join(me.HomeDir, ".ezoe.session")
 	if b, err := ioutil.ReadFile(session); err == nil {
 		http.DefaultClient.Jar.SetCookies(uri, []*http.Cookie{&http.Cookie{

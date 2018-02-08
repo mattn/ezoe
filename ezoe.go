@@ -18,8 +18,8 @@ import (
 
 	"github.com/PuerkitoBio/goquery"
 	"github.com/bgentry/speakeasy"
-	"github.com/jteeuwen/go-pkg-rss"
 	"github.com/mattn/go-colorable"
+	"github.com/mattn/go-pkg-rss"
 )
 
 const (
